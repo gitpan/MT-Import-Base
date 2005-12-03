@@ -3,7 +3,7 @@
 use strict;
 package MT::Import::Base;
 
-$MT::Import::Base::VERSION = '1.0';
+$MT::Import::Base::VERSION = '1.01';
 
 =head1 NAME
 
@@ -429,7 +429,7 @@ sub mk_category {
         return $cat;
 }
 
-=head2 $obj->mk_author($name)
+=head2 $obj->mk_author($name,$email)
 
 If it does not already exist for the blog defined by B<mt.blog_id> creates
 a new Movable Type author for I<$name>.
@@ -442,9 +442,10 @@ an error.
 =cut
 
 sub mk_author {
-        my $self = shift;
-        my $name = shift;
-        
+        my $self  = shift;
+        my $name  = shift;
+        my $email = shift;
+
         $name =~ s/^\s+//;
         $name =~ s/\s+$//;
         $name = lc($name);
@@ -455,7 +456,7 @@ sub mk_author {
         if (! $author) {
                 $author = MT::Author->new();
                 $author->name($name);
-                $author->email($name);
+                $author->email($email);
                 $author->type(&MT::Author::AUTHOR);
                 $author->set_password($self->{cfg}->param("mt.author_password"));
                 $author->created_by($self->{cfg}->param("mt.blog_ownerid"));
@@ -696,11 +697,11 @@ sub ping_for_reply {
 
 =head1 VERSION
 
-1.0
+1.01
 
 =head1 DATE
 
-$Date: 2005/12/02 05:27:59 $
+$Date: 2005/12/03 18:46:21 $
 
 =head1 AUTHOR
 

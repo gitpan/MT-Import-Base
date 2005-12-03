@@ -3,6 +3,7 @@ Changes
 lib/MT/Import/Base.pm
 Makefile.PL
 MANIFEST
+MANIFEST.SKIP
 META.yml
 README
 t/00-load.t
